@@ -85,6 +85,16 @@ input {
   color: color-mix(in oklab, currentColor 60%, transparent);
 }
 
+/* The checkbox alignment in Safari is weirdly low. It's hard to write- standard
+cross-platform JS to align it, so we target Safari specifically. */
+/* biome-ignore lint/correctness/noUnknownTypeSelector: hackin' */
+_::-webkit-full-page-media,
+/* biome-ignore lint/correctness/noUnknownTypeSelector: hackin' */
+  _:future,
+:root .setting input[type="checkbox"] {
+  vertical-align: 0.25em;
+}
+
 .setting:hover {
   /* background: color-mix(in oklab, currentColor 10%, transparent);
   box-shadow: 0 0 0.5em 0.5em color-mix(in oklab, currentColor 10%, transparent); */
