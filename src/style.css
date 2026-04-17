@@ -20,7 +20,7 @@ body {
 }
 
 body {
-  font-size: min(1.5rem, 1.5vw);
+  font-size: 1.2rem;
   display: grid;
   grid-template-areas: "header video" "controls video";
   grid-template-columns: 1fr 3fr;
