@@ -69,14 +69,25 @@ input {
   border-bottom: 2px solid
     light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
   position: sticky;
-  top: 0;
   padding: 0.5em;
+  top: 0;
   backdrop-filter: blur(0.5em);
   background-color: color-mix(
     in oklab,
-    light-dark(white, rgb(35, 35, 35)) 100%,
+    light-dark(white, rgb(35, 35, 35)) 80%,
     transparent
   );
+}
+
+.setting {
+  color: color-mix(in oklab, currentColor 60%, transparent);
+}
+
+.setting:hover {
+  /* background: color-mix(in oklab, currentColor 10%, transparent);
+  box-shadow: 0 0 0.5em 0.5em color-mix(in oklab, currentColor 10%, transparent); */
+  /* text-decoration: underline; */
+  color: currentColor;
 }
 
 #lead-in-flash {
