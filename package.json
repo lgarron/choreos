@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "v2.0.5",
-    "@cubing/deploy": "^0.2.2",
+    "@cubing/deploy": ">=0.4.11",
     "@cubing/dev-config": "^0.3.5",
     "@typescript/native-preview": "^7.0.0-dev.20260416.2",
     "bun-dx": "^0.1.4",
