@@ -1,4 +1,5 @@
 import "dashjs";
+import { mustExist } from "./mustExist";
 
 // 🤨
 const { dashjs } = globalThis;
@@ -86,6 +87,19 @@ function setPercent(
   );
 }
 
+const timestampControls = mustExist(
+  document.querySelector("timestamp-controls"),
+);
+
+let preventAutoScrollDueToManualScroll = false;
+// This has false negatives due to limitations of the DOM API.
+let autoScrollInProgress = false;
+timestampControls.addEventListener("scroll", () => {
+  if (!autoScrollInProgress) {
+    preventAutoScrollDueToManualScroll = true;
+  }
+});
+
 // TODO: Cap this, for when the parent bounding box is too small?
 const SCROLL_MARGIN_EM = 3;
 
@@ -122,20 +136,30 @@ function highlightCurrentTime(e: Event) {
       setPercent(latestButtonInfo, currentTime, e.type);
       button.classList.add("current");
 
-      const scrollMarginPx =
-        parseFloat(globalThis.getComputedStyle(button).fontSize) *
-        SCROLL_MARGIN_EM;
-      const buttonRect = button.getBoundingClientRect();
-      // biome-ignore lint/style/noNonNullAssertion: We know the parent element exists.
-      const parentRect = button.parentElement!.getBoundingClientRect();
-      const needsScroll =
-        buttonRect.top < parentRect.top + scrollMarginPx ||
-        buttonRect.bottom > parentRect.bottom - scrollMarginPx;
-      if (needsScroll) {
-        button.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+      if (!preventAutoScrollDueToManualScroll) {
+        const scrollMarginPx =
+          parseFloat(globalThis.getComputedStyle(button).fontSize) *
+          SCROLL_MARGIN_EM;
+        const buttonRect = button.getBoundingClientRect();
+        // biome-ignore lint/style/noNonNullAssertion: We know the parent element exists.
+        const parentRect = button.parentElement!.getBoundingClientRect();
+        const needsScroll =
+          buttonRect.top < parentRect.top + scrollMarginPx ||
+          buttonRect.bottom > parentRect.bottom - scrollMarginPx;
+        if (needsScroll) {
+          autoScrollInProgress = true;
+          button.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+          timestampControls.addEventListener(
+            "scrollend",
+            () => {
+              autoScrollInProgress = false;
+            },
+            { once: true },
+          );
+        }
       }
       currentButtonInfo = latestButtonInfo;
     }
@@ -143,10 +167,16 @@ function highlightCurrentTime(e: Event) {
     currentButtonInfo?.button.classList.remove("current");
   }
 }
+
+function enableAutoScrollAndHighlightCurrentTime(e: Event) {
+  preventAutoScrollDueToManualScroll = false;
+  highlightCurrentTime(e);
+}
+
 video.addEventListener("timeupdate", highlightCurrentTime);
-video.addEventListener("seeking", highlightCurrentTime);
-video.addEventListener("seeked", highlightCurrentTime);
-video.addEventListener("play", highlightCurrentTime);
+video.addEventListener("seeking", enableAutoScrollAndHighlightCurrentTime);
+video.addEventListener("seeked", enableAutoScrollAndHighlightCurrentTime);
+video.addEventListener("play", enableAutoScrollAndHighlightCurrentTime);
 video.addEventListener("pause", highlightCurrentTime);
 
 // biome-ignore lint/style/noNonNullAssertion: Rely on the element to exist.
@@ -165,6 +195,7 @@ const leadInFlash = document.querySelector(
 for (let i = 0; i < buttons.length; i++) {
   const button = buttons[i];
   button.addEventListener("click", (e: Event) => {
+    preventAutoScrollDueToManualScroll = false;
     video.currentTime = Math.max(
       // biome-ignore lint/style/noNonNullAssertion: Rely on the element to exist.
       Number.parseFloat(button.getAttribute("data-timestamp")!) -
