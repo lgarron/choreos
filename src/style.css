@@ -29,8 +29,37 @@ body {
   font-family: "Ubuntu", "Trebuchet MS", Verdana, Geneva, Tahoma, sans-serif;
 }
 
+@media (orientation: portrait) {
+  body {
+    grid-template-areas: "video" "header" "controls";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #669df5;
+
+    &:visited {
+      color: #af73d5;
+    }
+  }
+}
+
 header {
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+
+  & .title {
+    font-size: 1.25em;
+    padding: 0;
+    margin: 0.75rem;
+
+    & a.small-link {
+      font-weight: normal;
+      font-size: 0.75em;
+    }
+  }
 }
 
 timestamp-controls {
@@ -39,22 +68,8 @@ timestamp-controls {
   overflow-y: scroll;
 }
 
-.title {
-  font-size: 1.25em;
-  padding: 0;
-}
-
-.title {
-  margin: 0.75rem;
-}
-
 .subtitle p {
   margin: 0.75rem;
-}
-
-.title a.small-link {
-  font-weight: normal;
-  font-size: 0.75em;
 }
 
 input {
@@ -124,7 +139,7 @@ a.timestamp-link {
   margin: 2px;
 
   text-decoration: none;
-  color: black;
+  color: currentColor;
 
   background: linear-gradient(
     90deg,
@@ -132,25 +147,30 @@ a.timestamp-link {
     var(--gradient-right) 50%
   );
   background-size: 200%;
-  --gradient-left: rgba(0, 0, 0, 0.15);
-  --gradient-right: rgba(0, 0, 0, 0.05);
-}
+  --gradient-left: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.1));
+  --gradient-right: light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
 
-.settings + a.timestamp-link {
-  margin-top: 0;
-}
+  .settings + & {
+    margin-top: 0;
+  }
 
-.timestamp-value {
-  color: rgba(0, 0, 0, 0.4);
-}
+  &:hover {
+    --gradient-left: rgba(0, 0, 0, 0.05);
 
-a.timestamp-link:hover,
-a.timestamp-link:hover .timestamp-value {
-  color: rgba(0, 0, 255, 1);
-}
+    /* biome-ignore lint/style/noDescendingSpecificity: Needed to keep this DRY. */
+    &,
+    & .timestamp-value {
+      color: rgba(0, 0, 255, 1);
+    }
+  }
 
-a.timestamp-link:hover {
-  --gradient-left: rgba(0, 0, 0, 0.05);
+  .timestamp-value {
+    color: light-dark(rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.5));
+  }
+
+  &.current {
+    --gradient-left: rgb(0, 128, 255, 0.3);
+  }
 }
 
 video {
@@ -167,73 +187,23 @@ video {
   display: grid;
   place-content: center;
   font-size: 200%;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-a.timestamp-link.current {
-  --gradient-left: rgb(0, 128, 255, 0.3);
-}
-
-@media (orientation: portrait) {
-  body {
-    grid-template-areas: "video" "header" "controls";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-  }
+  color: light-dark(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7));
 }
 
 timestamp-controls {
+  background-color: light-dark(transparent, rgb(35, 35, 35));
   top: 0;
-}
 
-timestamp-controls .heading {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  place-content: center;
-  padding: 0.5em 0.5em 0.25em;
-  gap: 0.5em;
-  box-sizing: border-box;
+  & .heading {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    place-content: center;
+    padding: 0.5em 0.5em 0.25em;
+    gap: 0.5em;
+    box-sizing: border-box;
+  }
 }
 
 .fleuron {
   font-size: 125%;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    background: #000d;
-    color: #eee;
-  }
-
-  a {
-    color: #669df5;
-  }
-
-  a:visited {
-    color: #af73d5;
-  }
-
-  .timestamp-value {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  timestamp-controls {
-    --background-color: rgb(35, 35, 35);
-    background-color: var(--background-color);
-  }
-
-  a.timestamp-link {
-    color: white;
-    --gradient-left: rgba(255, 255, 255, 0.1);
-    --gradient-right: rgba(0, 0, 0, 0.3);
-  }
-
-  a.timestamp-link:hover,
-  a.timestamp-link:hover .timestamp-value {
-    color: #669df5;
-  }
-
-  .flourish {
-    color: rgba(255, 255, 255, 0.7);
-  }
 }
