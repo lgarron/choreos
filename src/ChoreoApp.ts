@@ -39,7 +39,10 @@ export class ChoreoApp {
       localStorageChoreoKey: string;
     },
   ) {
-    if (options.localVideoURL && new URL(location.href).hostname === "localhost") {
+    if (
+      options.localVideoURL &&
+      new URL(location.href).hostname === "localhost"
+    ) {
       console.log(options.localVideoURL);
       mustExist(document.querySelector<HTMLVideoElement>("#videoPlayer")).src =
         new URL(options.localVideoURL, location.href).toString();
