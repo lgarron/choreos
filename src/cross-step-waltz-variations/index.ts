@@ -6,4 +6,5 @@ import { ChoreoApp } from "../ChoreoApp";
     "https://garron.net/dance/choreo/cross-step-waltz-variations/video/dash/stream.mpd",
   localVideoURL: "./video/cross-step-waltz-variations.mp4",
   leadInSeconds: 6,
+  localStorageChoreoKey: "cross-step-waltz-variations",
 });

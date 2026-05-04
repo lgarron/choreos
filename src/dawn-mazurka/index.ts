@@ -6,4 +6,5 @@ import { ChoreoApp } from "../ChoreoApp";
     "https://garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/dawn-mazurka.mpd",
   localVideoURL: "./video/dawn-mazurka-1080p-qv25.mp4",
   leadInSeconds: 4.35,
+  localStorageChoreoKey: "dawn-mazurka",
 });

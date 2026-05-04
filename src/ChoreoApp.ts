@@ -27,11 +27,18 @@ export class ChoreoApp {
   // This has false negatives due to limitations of the DOM API.
   private autoScrollInProgress = false;
 
-  constructor(options: {
-    mpdURL: string;
-    localVideoURL: string;
-    leadInSeconds: number;
-  }) {
+  localStorageKey(type: "lead-in"): string {
+    return `dance/choreo/${this.options.localStorageChoreoKey}/${type}`;
+  }
+
+  constructor(
+    private options: {
+      mpdURL: string;
+      localVideoURL: string;
+      leadInSeconds: number;
+      localStorageChoreoKey: string;
+    },
+  ) {
     if (new URL(location.href).hostname === "localhost") {
       console.log(options.localVideoURL);
       mustExist(document.querySelector<HTMLVideoElement>("#videoPlayer")).src =
@@ -90,11 +97,11 @@ export class ChoreoApp {
 
     // biome-ignore lint/style/noNonNullAssertion: Rely on the element to exist.
     const leadIn = document.querySelector("#lead-in")! as HTMLInputElement;
-    // biome-ignore lint/complexity/useLiteralKeys: https://github.com/biomejs/biome/issues/463
-    leadIn.checked = localStorage["dawnMazurkaAppLeadIn"] === "true";
+    leadIn.checked = localStorage[this.localStorageKey("lead-in")] === "true";
     leadIn.addEventListener("change", () => {
-      // biome-ignore lint/complexity/useLiteralKeys: https://github.com/biomejs/biome/issues/463
-      localStorage["dawnMazurkaAppLeadIn"] = leadIn.checked ? "true" : "false";
+      localStorage[this.localStorageKey("lead-in")] = leadIn.checked
+        ? "true"
+        : "false";
     });
 
     // biome-ignore lint/style/noNonNullAssertion: Rely on the element to exist.
