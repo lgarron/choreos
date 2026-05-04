@@ -21,6 +21,7 @@
     "bun-types@1.3.12": "patches/bun-types@1.3.12.patch"
   },
   "@cubing/deploy": {
-    "https://garron.net/dance/choreo/dawn-mazurka/": {}
-  }
+    "https://garron.net/dance/choreo/": {}
+  },
+  "$schema": "./node_modules/@cubing/deploy/config-schema.package.json"
 }

@@ -6,8 +6,18 @@ dev: setup
 check: lint build
 
 .PHONY: build
-build: setup
-	bun x -- bun-dx --package vite vite -- build --emptyOutDir --outDir ../dist/web/garron.net/dance/choreo/dawn-mazurka/ ./src/
+build: build-vite build-copy-dash-files
+
+.PHONY: build-vite
+build-vite: setup
+	bun x -- bun-dx --package vite vite -- build --emptyOutDir --outDir ../dist/web/garron.net/dance/choreo/ ./src/
+
+.PHONY: build-copy-dash-files
+build-copy-dash-files: setup
+	mkdir -p ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
+	rsync -a ./src/public/dawn-mazurka/video/dash/dawn-mazurka/ ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
+	mkdir -p ./dist/web/garron.net/dance/choreo/cross-step-waltz-variations/video/dash/
+	rsync -a ./src/public/cross-step-waltz-variations/video/dash/ ./dist/web/garron.net/dance/choreo/cross-step-waltz-variations/video/dash/
 
 .PHONY: lint
 lint: lint-biome lint-typescript
@@ -40,6 +50,4 @@ reset: clean
 
 .PHOHY: deploy
 deploy: setup build
-	mkdir -p ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
-	rsync -a ./src/video/dash/dawn-mazurka/ ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
 	bun x -- bun-dx --package @cubing/deploy deploy --
