@@ -34,12 +34,12 @@ export class ChoreoApp {
   constructor(
     private options: {
       mpdURL: string;
-      localVideoURL: string;
+      localVideoURL?: string;
       leadInSeconds: number;
       localStorageChoreoKey: string;
     },
   ) {
-    if (new URL(location.href).hostname === "localhost") {
+    if (options.localVideoURL && new URL(location.href).hostname === "localhost") {
       console.log(options.localVideoURL);
       mustExist(document.querySelector<HTMLVideoElement>("#videoPlayer")).src =
         new URL(options.localVideoURL, location.href).toString();

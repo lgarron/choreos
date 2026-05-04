@@ -1,0 +1,21 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'dawn-mazurka.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 512
+    compatible_brands: mp42iso2mp41
+    creation_time   : 2024-10-20T04:56:40.000000Z
+    title           : [HDR-v0.3.2] Russian Mazurka Quadrille ("Dawn Mazurka") by Richard Powers
+    artist          : Lucas Garron
+    encoder         : HandBrake 1.7.3 2024021000
+  Duration: 00:02:47.79, start: 0.000000, bitrate: 12993 kb/s
+  Stream #0:0[0x1](und): Video: hevc (Main 10) (hvc1 / 0x31637668), yuv420p10le(tv, bt2020nc/bt2020/arib-std-b67), 1920x1080 [SAR 1:1 DAR 16:9], 12799 kb/s, 59.94 fps, 59.94 tbr, 90k tbn (default)
+      Metadata:
+        creation_time   : 2024-10-20T04:56:40.000000Z
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 176 kb/s (default)
+      Metadata:
+        creation_time   : 2024-10-20T04:56:40.000000Z
+        handler_name    : Stereo
+        vendor_id       : [0][0][0][0]
+At least one output file must be specified
