@@ -14,9 +14,9 @@ build-vite: setup
 
 .PHONY: build-copy-dash-files
 build-copy-dash-files: setup
-	mkdir -p ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
+	mkdir -p ./src/public/dawn-mazurka/video/dash/dawn-mazurka/ ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
 	rsync -a ./src/public/dawn-mazurka/video/dash/dawn-mazurka/ ./dist/web/garron.net/dance/choreo/dawn-mazurka/video/dash/dawn-mazurka/
-	mkdir -p ./dist/web/garron.net/dance/choreo/cross-step-waltz-variations/video/dash/
+	mkdir -p ./src/public/cross-step-waltz-variations/video/dash/ ./dist/web/garron.net/dance/choreo/cross-step-waltz-variations/video/dash/
 	rsync -a ./src/public/cross-step-waltz-variations/video/dash/ ./dist/web/garron.net/dance/choreo/cross-step-waltz-variations/video/dash/
 
 .PHONY: lint
