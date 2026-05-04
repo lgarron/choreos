@@ -1,0 +1,5 @@
+# TODO: remove this workaround once https://github.com/jj-vcs/jj/issues/80 is resolved.
+# This requires extra work to commit the files when they change, but it has the upside of not breaking with `jj`.
+/*/video/dash/**/*.mp4
+/*/video/dash/**/*.m4s
+/*/video/dash/**/*.jpg
