@@ -5,12 +5,22 @@
   "type": "module",
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@fontsource/ubuntu": "^5.2.8",
+    "dashjs": "^5.1.1"
+  },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "v2.0.5",
+    "@cubing/deploy": ">=0.4.11",
     "@cubing/dev-config": "^0.3.5",
+    "@typescript/native-preview": "^7.0.0-dev.20260416.2",
+    "bun-dx": "^0.1.4",
     "vite": "^6.3.5"
   },
+  "patchedDependencies": {
+    "bun-types@1.3.12": "patches/bun-types@1.3.12.patch"
+  },
   "@cubing/deploy": {
-    "https://garron.net/app/cross-step/": {}
+    "https://garron.net/dance/choreo/dawn-mazurka/": {}
   }
 }

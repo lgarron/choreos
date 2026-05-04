@@ -1,0 +1,9 @@
+import { ChoreoApp } from "../ChoreoApp";
+
+// biome-ignore lint/suspicious/noExplicitAny: We're setting a global on purpose.
+(globalThis as any).app = new ChoreoApp({
+  mpdURL:
+    "https://garron.net/dance/choreo/cross-step-waltz-variations/video/dash/stream.mpd",
+  localVideoURL: "./video/cross-step-waltz-variations.mp4",
+  leadInSeconds: 6,
+});

@@ -1,3 +1,9 @@
+@import "@fontsource/ubuntu";
+
+:root {
+  color-scheme: light dark;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -12,23 +18,22 @@ body {
 
   position: fixed;
   overflow-y: hidden;
-  height: 100%;
   max-height: 100%;
 }
 
 body {
-  font-size: min(1.5rem, 1.5vw);
+  font-size: 1.2rem;
   display: grid;
   grid-template-areas: "header video" "controls video";
   grid-template-columns: 1fr 3fr;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Ubuntu", "Trebuchet MS", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 
-controls {
+timestamp-controls {
   grid-area: controls;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -39,12 +44,15 @@ controls {
   padding: 0;
 }
 
-.title,
-header > div {
-  margin: 0.75em;
+.title {
+  margin: 0.75rem;
 }
 
-.title a {
+.subtitle p {
+  margin: 0.75rem;
+}
+
+.title a.small-link {
   font-weight: normal;
   font-size: 0.75em;
 }
@@ -55,6 +63,45 @@ input {
   margin-left: 0;
 }
 
+.settings {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 2px solid
+    light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+  position: sticky;
+  padding: 0.5em;
+  top: 0;
+  backdrop-filter: blur(0.5em);
+  background-color: color-mix(
+    in oklab,
+    light-dark(white, rgb(35, 35, 35)) 80%,
+    transparent
+  );
+}
+
+.setting {
+  color: color-mix(in oklab, currentColor 60%, transparent);
+}
+
+/* The checkbox alignment in Safari is weirdly low. It's hard to write- standard
+cross-platform JS to align it, so we target Safari specifically. */
+/* biome-ignore lint/correctness/noUnknownTypeSelector: hackin' */
+_::-webkit-full-page-media,
+/* biome-ignore lint/correctness/noUnknownTypeSelector: hackin' */
+  _:future,
+:root .setting input[type="checkbox"] {
+  vertical-align: 0.25em;
+}
+
+.setting:hover {
+  /* background: color-mix(in oklab, currentColor 10%, transparent);
+  box-shadow: 0 0 0.5em 0.5em color-mix(in oklab, currentColor 10%, transparent); */
+  /* text-decoration: underline; */
+  color: currentColor;
+}
+
 #lead-in-flash {
   margin: -0.25em;
   padding: 0.25em;
@@ -62,6 +109,8 @@ input {
 }
 
 a.timestamp-link {
+  touch-action: manipulation;
+
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5em;
@@ -87,6 +136,10 @@ a.timestamp-link {
   --gradient-right: rgba(0, 0, 0, 0.05);
 }
 
+.settings + a.timestamp-link {
+  margin-top: 0;
+}
+
 .timestamp-value {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -107,6 +160,7 @@ video {
   object-fit: contain;
   overflow: hidden;
   background: rgba(0, 0, 0, 1);
+  cursor: pointer;
 }
 
 .flourish {
@@ -124,18 +178,32 @@ a.timestamp-link.current {
   body {
     grid-template-areas: "video" "header" "controls";
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto 1fr;
   }
+}
+
+timestamp-controls {
+  top: 0;
+}
+
+timestamp-controls .heading {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  place-content: center;
+  padding: 0.5em;
+  gap: 0.5em;
+  height: 2em;
+  box-sizing: border-box;
+}
+
+.fleuron {
+  font-size: 125%;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     background: #000d;
     color: #eee;
-  }
-
-  header {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
   }
 
   a {
@@ -150,8 +218,9 @@ a.timestamp-link.current {
     color: rgba(255, 255, 255, 0.5);
   }
 
-  controls {
-    background-color: rgba(255, 255, 255, 0.1);
+  timestamp-controls {
+    --background-color: rgb(35, 35, 35);
+    background-color: var(--background-color);
   }
 
   a.timestamp-link {
