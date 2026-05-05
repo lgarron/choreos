@@ -160,7 +160,7 @@ a.timestamp-link {
     /* biome-ignore lint/style/noDescendingSpecificity: Needed to keep this DRY. */
     &,
     & .timestamp-value {
-      color: rgba(0, 0, 255, 1);
+      color: light-dark(rgba(0, 0, 255, 1), #669df5);
     }
   }
 
