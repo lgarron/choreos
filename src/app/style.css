@@ -128,7 +128,7 @@ a.timestamp-link {
 
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.5em;
+  gap: 0em 0.5em;
 
   font-size: 1em;
   padding: 0.2em 0.5em;
@@ -152,6 +152,14 @@ a.timestamp-link {
 
   .settings + & {
     margin-top: 0;
+  }
+
+  & .note {
+    opacity: 0.35;
+    font-size: 0.8em;
+    grid-column: 2 / 3;
+    text-wrap: pretty;
+    padding: 0.2em 0em;
   }
 
   &:hover {
