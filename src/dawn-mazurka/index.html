@@ -87,7 +87,18 @@
     <a class="timestamp-link" href="#" data-timestamp="163.5"><span class="timestamp-value">2:43</span> Finish</a>
     <br /><span class="flourish">❦<!--※⁜⏟--></span><br />
   </timestamp-controls>
-  <video id="videoPlayer" controls playsinline></video>
+  <video id="videoPlayer" controls playsinline>
+    <!-- 
+      We reuse the same file for chapters and subtitles because they don't
+      technically conflict and both can be useful.
+
+      In theory, we should be using `"descriptions"` instead of `"subtitles"`,
+      but this causes 1) Chrome not to offer them, and 2) Safari to offer them
+      but not display them properly. (They don't seem to work in Firefox no matter what.)
+     -->
+    <track kind="chapters" src="./timestamps.vtt" srclang="en">
+    <track kind="subtitles" src="./timestamps.vtt" srclang="en">
+  </video>
 </body>
 
 </html>
