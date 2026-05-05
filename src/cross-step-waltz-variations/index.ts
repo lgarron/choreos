@@ -1,4 +1,4 @@
-import { ChoreoApp } from "../ChoreoApp";
+import { ChoreoApp } from "../app/ChoreoApp";
 
 // biome-ignore lint/suspicious/noExplicitAny: We're setting a global on purpose.
 (globalThis as any).app = new ChoreoApp({
