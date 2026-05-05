@@ -195,7 +195,7 @@ footer {
   display: grid;
   place-content: center;
   align-items: center;
-  margin: 0.5em auto 1em;
+  margin: 0.5em auto 1.5em;
   gap: 0.5em;
 
   & .flourish {
