@@ -195,17 +195,19 @@ footer {
   display: grid;
   place-content: center;
   align-items: center;
-  margin: 0.5em auto 1.5em;
+  margin: 1em auto 1.5em;
   gap: 0.5em;
+
+  font-size: 85%;
 
   & .flourish {
     text-align: center;
-    font-size: 200%;
+    font-size: 235%;
     color: light-dark(rgba(0, 0, 0, 0.7), rgba(255, 255, 255, 0.7));
   }
 
-  & a {
-    font-size: 85%;
+  & span {
+    text-align: center;
   }
 }
 
