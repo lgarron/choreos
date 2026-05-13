@@ -111,9 +111,6 @@ _::-webkit-full-page-media,
 }
 
 .setting:hover {
-  /* background: color-mix(in oklab, currentColor 10%, transparent);
-  box-shadow: 0 0 0.5em 0.5em color-mix(in oklab, currentColor 10%, transparent); */
-  /* text-decoration: underline; */
   color: currentColor;
 }
 
