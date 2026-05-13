@@ -188,6 +188,15 @@ video {
   overflow: hidden;
   background: rgba(0, 0, 0, 1);
   cursor: pointer;
+
+  /* Apply in wide landscape (requires tweak to allow full-width controls and no excess vertical crop). */
+  @media (orientation: portrait) {
+    @media (max-width: 768px), (min-aspect-ratio: 4 / 5) {
+      aspect-ratio: var(--portrait-aspect-ratio);
+      object-position: var(--portrait-object-position);
+      object-fit: cover;
+    }
+  }
 }
 
 footer {
