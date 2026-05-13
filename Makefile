@@ -2,6 +2,10 @@
 dev: setup
 	bun x -- bun-dx --package vite vite -- ./src/
 
+.PHONY: dev-host
+dev-host: setup
+	bun x -- bun-dx --package vite vite -- --host localhost ./src/
+
 .PHONY: check
 check: lint build
 
