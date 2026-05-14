@@ -29,14 +29,6 @@ body {
   font-family: "Ubuntu", "Trebuchet MS", Verdana, Geneva, Tahoma, sans-serif;
 }
 
-@media (orientation: portrait) {
-  body {
-    grid-template-areas: "video" "header" "controls";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-  }
-}
-
 @media (prefers-color-scheme: dark) {
   a {
     color: #669df5;
@@ -188,15 +180,6 @@ video {
   overflow: hidden;
   background: rgba(0, 0, 0, 1);
   cursor: pointer;
-
-  /* Apply in wide landscape (requires tweak to allow full-width controls and no excess vertical crop). */
-  @media (orientation: portrait) {
-    @media (max-width: 768px), (min-aspect-ratio: 4 / 5) {
-      aspect-ratio: var(--portrait-aspect-ratio);
-      object-position: var(--portrait-object-position);
-      object-fit: cover;
-    }
-  }
 }
 
 footer {
@@ -235,4 +218,35 @@ timestamp-controls {
 
 .fleuron {
   font-size: 125%;
+}
+
+@media (orientation: portrait) {
+  body {
+    grid-template-areas: "video" "header" "controls";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+  }
+
+  @media (max-width: 768px), (min-aspect-ratio: 4 / 5) {
+    .settings {
+      font-size: 1em;
+      padding: 0.25em 0.5em;
+    }
+
+    header .title {
+      font-size: 1em;
+      margin: 0.5rem;
+    }
+
+    .subtitle p {
+      margin: 0.5rem;
+    }
+
+    /* TODO: Apply in wide landscape (requires tweak to allow full-width controls and no excess vertical crop). */
+    video {
+      aspect-ratio: var(--portrait-aspect-ratio);
+      object-position: var(--portrait-object-position);
+      object-fit: cover;
+    }
+  }
 }
