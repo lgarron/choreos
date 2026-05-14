@@ -227,7 +227,7 @@ timestamp-controls {
     grid-template-rows: auto auto 1fr;
   }
 
-  @media (max-width: 768px), (min-aspect-ratio: 4 / 5) {
+  @media (max-width: 768px), (min-aspect-ratio: 7 / 10) {
     .settings {
       font-size: 1em;
       padding: 0.25em 0.5em;
